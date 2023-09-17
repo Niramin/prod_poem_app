@@ -62,7 +62,9 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-
+  assets:
+    - assets/images/
+    - assets/poems/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
@@ -88,3 +90,19 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+fonts:
+    - family: MedievalSharp
+      fonts:
+        - asset: assets/fonts/MedievalSharp-Regular.ttf
+
+    - family: Satisfy
+      fonts:
+        - asset: assets/fonts/Satisfy-Regular.ttf
+    
+    - family: Nunito Sans
+      fonts:
+        - asset: assets/fonts/NunitoSans_7pt_Expanded-ExtraLight.ttf
+
+    - family: PoppinsLight
+      fonts:
+        - asset: assets/fonts/Poppins-Light.ttf

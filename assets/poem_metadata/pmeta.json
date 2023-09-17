@@ -1,0 +1,13 @@
+{
+    "todays_poem":
+    {
+        "date": "",
+        "liked": false,
+        "poem_id" : "p0"
+    },
+    
+    "likes":
+    [
+        
+    ]
+}
