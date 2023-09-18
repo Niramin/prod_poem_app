@@ -24,7 +24,7 @@ class Poems implements IPoemRepository{
   Future<bool> dislikePoemAsync(Poem poem) async {
     // TODO: implement dislikePoem
     String pname = poem.title;
-    debugPrint("Disliked Poem '$pname'");
+    debugPrint("::Disliked Poem '$pname'");
     return true;
     
   }
@@ -46,7 +46,7 @@ class Poems implements IPoemRepository{
   Future<bool> likePoemAsync(Poem poem) async {
     // TODO: implement likePoemAsync
     String pname = poem.title;
-    debugPrint("Liked Poem '$pname'");
+    debugPrint("::Liked Poem '$pname'");
     return true;
   }
 

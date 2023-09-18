@@ -71,6 +71,13 @@ class _ControllerState extends State<Controller>{
               onPressed: () {
                 setState(() {
                   isLike = !isLike;
+                  if(isLike)
+                  {
+                    todayPoem.likePoem();
+                  }
+                  else{
+                    todayPoem.dislikePoem();
+                  }
                 });
               },
               tooltip: 'Like',
