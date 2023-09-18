@@ -9,6 +9,9 @@ class Controller extends StatefulWidget{
 
 
 class _ControllerState extends State<Controller>{
+  //get the day's Poem
+  //get the curent sky 
+  
 
  @override
  Widget build(BuildContext context)
