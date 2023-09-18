@@ -94,19 +94,19 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-fonts:
-    - family: MedievalSharp
-      fonts:
-        - asset: assets/fonts/MedievalSharp-Regular.ttf
+  fonts:
+      - family: MedievalSharp
+        fonts:
+          - asset: assets/fonts/MedievalSharp-Regular.ttf
 
-    - family: Satisfy
-      fonts:
-        - asset: assets/fonts/Satisfy-Regular.ttf
-    
-    - family: Nunito Sans
-      fonts:
-        - asset: assets/fonts/NunitoSans_7pt_Expanded-ExtraLight.ttf
+      - family: Satisfy
+        fonts:
+          - asset: assets/fonts/Satisfy-Regular.ttf
+      
+      - family: Nunito Sans
+        fonts:
+          - asset: assets/fonts/NunitoSans_7pt_Expanded-ExtraLight.ttf
 
-    - family: PoppinsLight
-      fonts:
-        - asset: assets/fonts/Poppins-Light.ttf
+      - family: PoppinsLight
+        fonts:
+          - asset: assets/fonts/Poppins-Light.ttf

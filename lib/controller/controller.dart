@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:prod_poem_app/model/PoemRepository.dart';
 import 'package:prod_poem_app/model/poem.dart';
 import 'package:intl/intl.dart' as intl;
+import 'package:prod_poem_app/view/PoemDisplay.dart';
 
 class Controller extends StatefulWidget{
   const Controller({super.key});
@@ -63,7 +64,11 @@ class _ControllerState extends State<Controller>{
             ),
           )),
         ),
-    body: Text(todayPoem.content),
+    body: Stack(
+      children: [
+        FrontDisplay(poem: todayPoem),
+      ],
+    ),
     floatingActionButton: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
