@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:prod_poem_app/model/PoemRepository.dart';
 import 'package:prod_poem_app/model/poem.dart';
 import 'package:intl/intl.dart' as intl;
+import 'package:prod_poem_app/view/MorningSky.dart';
 import 'package:prod_poem_app/view/PoemDisplay.dart';
+import 'package:provider/provider.dart';
 
 class Controller extends StatefulWidget{
   const Controller({super.key});
@@ -49,60 +51,64 @@ class _ControllerState extends State<Controller>{
     } else {
       icon = Icons.favorite_border;
     }
-  return Scaffold(
-    backgroundColor: Colors.blue.shade200,
-    appBar: AppBar(
-          backgroundColor: Colors.pink.shade100,
-          title: Center(
-              child: Text(
-            dayOfWeek,
-            style: const TextStyle(
-              fontFamily: 'MedievalSharp',
-              fontWeight: FontWeight.bold,
-              color: Colors.limeAccent,
-              fontSize: 40,
-            ),
-          )),
-        ),
-    body: Stack(
-      children: [
-        FrontDisplay(poem: todayPoem),
-      ],
+  return ChangeNotifierProvider(
+    create: (context) => SkyAppState(),
+    child: Scaffold(
+      backgroundColor: Colors.blue.shade200,
+      appBar: AppBar(
+            backgroundColor: Colors.pink.shade100,
+            title: Center(
+                child: Text(
+              dayOfWeek,
+              style: const TextStyle(
+                fontFamily: 'MedievalSharp',
+                fontWeight: FontWeight.bold,
+                color: Colors.limeAccent,
+                fontSize: 40,
+              ),
+            )),
+          ),
+      body: Stack(
+        children: [
+          const Clouds(),
+          FrontDisplay(poem: todayPoem),
+        ],
+      ),
+      floatingActionButton: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              FloatingActionButton(
+                onPressed: () {
+                  setState(() {
+                    isLike = !isLike;
+                    if(isLike)
+                    {
+                      todayPoem.likePoem();
+                    }
+                    else{
+                      todayPoem.dislikePoem();
+                    }
+                  });
+                },
+                tooltip: 'Like',
+                backgroundColor: Colors.pink.shade100,
+                foregroundColor: Colors.limeAccent,
+                child: Icon(icon),
+              ),
+              const SizedBox(
+                width: 70,
+              ),
+              FloatingActionButton(
+                onPressed: () => {},
+                tooltip: 'Shuffle',
+                backgroundColor: Colors.pink.shade100,
+                foregroundColor: Colors.limeAccent,
+                child: const Icon(Icons.shuffle),
+              ),
+            ],
+          ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     ),
-    floatingActionButton: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            FloatingActionButton(
-              onPressed: () {
-                setState(() {
-                  isLike = !isLike;
-                  if(isLike)
-                  {
-                    todayPoem.likePoem();
-                  }
-                  else{
-                    todayPoem.dislikePoem();
-                  }
-                });
-              },
-              tooltip: 'Like',
-              backgroundColor: Colors.pink.shade100,
-              foregroundColor: Colors.limeAccent,
-              child: Icon(icon),
-            ),
-            const SizedBox(
-              width: 70,
-            ),
-            FloatingActionButton(
-              onPressed: () => {},
-              tooltip: 'Shuffle',
-              backgroundColor: Colors.pink.shade100,
-              foregroundColor: Colors.limeAccent,
-              child: const Icon(Icons.shuffle),
-            ),
-          ],
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
   );
  }
 
