@@ -1,8 +1,5 @@
 {
-    "todays_poem":
-    {
-        "date": "",
-        "poem_id" : "p0"
-    }
+    "date": "0000",
+    "poem_id" : "p0"
 
 }
