@@ -57,22 +57,30 @@ class PoemContent extends StatelessWidget {
   const PoemContent({
     super.key,
     required this.poem,
+    required this.status
   });
 
   final Poem poem;
+  final String status;
 
   @override
   Widget build(BuildContext context) {
+    Color txtColour = Colors.black;
+    if(status == "night")
+    {
+      txtColour = Colors.amber.shade50;
+    }
     return Center(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
         child: Text(
-          
+        
           poem.content,
-          style: const TextStyle(
+          style:  TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.w600,
             fontFamily: "PoppinsLight",
+            color: txtColour
           ),
         ),
       ),
@@ -84,14 +92,25 @@ class FrontDisplay extends StatelessWidget {
   const FrontDisplay({
     super.key,
     required this.poem,
+    required this.status
     
   });
 
   final Poem poem;
+  final String status;
   
+  
+
 
   @override
   Widget build(BuildContext context) {
+    String topborderimg = "assets/images/topBorder.png";
+    String bottomborderimg = "assets/images/bottomBorder.png";
+    if(status=="night")
+    {
+      topborderimg = "assets/images/topBorderNight.png";
+      bottomborderimg = "assets/images/bottomBorderNight.png";
+    }
     return ListView(
       children: [
         const SizedBox(
@@ -99,12 +118,12 @@ class FrontDisplay extends StatelessWidget {
         ),
         TitleCard(mypoem: poem),
         const SizedBox( height: 40,),
-        const Image(
-          image: AssetImage("assets/images/topBorder.png"),
+        Image(
+          image: AssetImage(topborderimg),
         ),
-        PoemContent(poem: poem),
-        const Image(
-          image: AssetImage("assets/images/bottomBorder.png"),
+        PoemContent(poem: poem,status: status),
+        Image(
+          image: AssetImage(bottomborderimg),
         ),
         const SizedBox( height: 70,),
       ],

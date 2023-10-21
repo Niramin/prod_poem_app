@@ -3,6 +3,7 @@ import 'package:prod_poem_app/model/PoemRepository.dart';
 import 'package:prod_poem_app/model/poem.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:prod_poem_app/view/MorningSky.dart';
+import 'package:prod_poem_app/view/NightSky.dart';
 import 'package:prod_poem_app/view/PoemDisplay.dart';
 import 'package:provider/provider.dart';
 
@@ -51,27 +52,44 @@ class _ControllerState extends State<Controller>{
     } else {
       icon = Icons.favorite_border;
     }
+
+    ColorContext curContext = ColorContext();
+    bool isNight = false;
+    var hour = DateTime.now().hour;
+    if(hour> 18)
+    {
+      isNight = true;
+    }
+    if(isNight)
+    {
+        curContext.setNight();
+    }
+    else{
+      curContext.setDay();
+    }
+
+    curContext.setNight();
   return ChangeNotifierProvider(
     create: (context) => SkyAppState(),
     child: Scaffold(
-      backgroundColor: Colors.blue.shade200,
+      backgroundColor: curContext.bgColour,
       appBar: AppBar(
-            backgroundColor: Colors.pink.shade100,
+            backgroundColor:curContext.labelColor,
             title: Center(
                 child: Text(
               dayOfWeek,
-              style: const TextStyle(
+              style:  TextStyle(
                 fontFamily: 'MedievalSharp',
                 fontWeight: FontWeight.bold,
-                color: Colors.limeAccent,
+                color:  curContext.txtColour,
                 fontSize: 40,
               ),
             )),
           ),
       body: Stack(
         children: [
-          const Clouds(),
-          FrontDisplay(poem: todayPoem),
+          curContext.sky as Widget,
+          FrontDisplay(poem: todayPoem,status: curContext.status,),
         ],
       ),
       floatingActionButton: Row(
@@ -80,8 +98,8 @@ class _ControllerState extends State<Controller>{
               FloatingActionButton(
                 onPressed: () => {},
                 tooltip: 'Share',
-                backgroundColor: Colors.pink.shade100,
-                foregroundColor: Colors.limeAccent,
+                backgroundColor: curContext.labelColor,
+                foregroundColor: curContext.txtColour,
                 child: const Icon(Icons.share),
               ),
             ],
@@ -91,4 +109,26 @@ class _ControllerState extends State<Controller>{
   );
  }
 
+}
+
+class ColorContext{
+  Color bgColour = Colors.blue.shade200;
+  Color labelColor = Colors.pink.shade100;
+  Color txtColour=Colors.limeAccent ;
+  String status = "morning";
+  Widget?sky = null;
+
+  setNight()
+  {
+    
+      bgColour = Colors.black;
+      labelColor = Colors.pink.shade800;
+      //curContext.txtColour = Colors.amber.shade100;
+      //curContect.lableColour = 
+      status = "night";
+      sky = NightSky();
+  }
+  setDay(){
+    sky = Clouds();
+  }
 }
