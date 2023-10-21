@@ -1,5 +1,8 @@
 import 'package:flutter/foundation.dart';
+import 'package:prod_poem_app/common/Helper.dart';
 import 'package:prod_poem_app/model/poem.dart';
+import 'package:prod_poem_app/model/repo_helpers/todayPoem.dart';
+
 
 abstract class IPoemRepository{
 
@@ -7,6 +10,7 @@ abstract class IPoemRepository{
   Future<bool> likePoemAsync(Poem poem);
   Future<bool> dislikePoemAsync(Poem poem);
   Future<Poem> getPoemFromLikesAsync();
+   Future<Poem> getPoemFromId(String id);
 
 }
 
@@ -18,6 +22,13 @@ class Poems implements IPoemRepository{
     return _singleton;
   }
   Poems._internal();
+
+
+  Future<String> loadPoemFileText({String poemid="p0"}) async {
+    String fileText = await helper.loadAssetFileText('assets/poems/$poemid');
+    return fileText;
+    
+  }
 
 
   @override
@@ -38,8 +49,11 @@ class Poems implements IPoemRepository{
 
   @override
   Future<Poem> getTodaysPoemAsync() async {
-    // TODO: implement getTodaysPoemAsync
-    return _getSamplePoem();
+    
+
+    String todayPoemId = await getTodayPoemIdAsync();
+    Poem todayPoem = await getPoemFromId(todayPoemId);
+    return todayPoem;
   }
 
   @override
@@ -72,5 +86,20 @@ class Poems implements IPoemRepository{
     "I am the captain of my soul.\n";
 
     return sample_poem;
+  }
+  
+  @override
+  Future<Poem> getPoemFromId(String id) async {
+    String poemFileText = await loadPoemFileText(poemid:id);
+    var poemFileLines = poemFileText.split("\n");
+    var poemLines = poemFileLines.sublist(2,poemFileLines.length).join("\n");
+
+    Poem newPoem = Poem(
+    title: poemFileLines[0],
+    content: poemLines,
+    id: int.parse(id.substring(1)),
+    author: poemFileLines[1]);
+
+    return newPoem;
   }
 }
