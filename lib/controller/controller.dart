@@ -78,32 +78,11 @@ class _ControllerState extends State<Controller>{
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               FloatingActionButton(
-                onPressed: () {
-                  setState(() {
-                    isLike = !isLike;
-                    if(isLike)
-                    {
-                      todayPoem.likePoem();
-                    }
-                    else{
-                      todayPoem.dislikePoem();
-                    }
-                  });
-                },
-                tooltip: 'Like',
-                backgroundColor: Colors.pink.shade100,
-                foregroundColor: Colors.limeAccent,
-                child: Icon(icon),
-              ),
-              const SizedBox(
-                width: 70,
-              ),
-              FloatingActionButton(
                 onPressed: () => {},
-                tooltip: 'Shuffle',
+                tooltip: 'Share',
                 backgroundColor: Colors.pink.shade100,
                 foregroundColor: Colors.limeAccent,
-                child: const Icon(Icons.shuffle),
+                child: const Icon(Icons.share),
               ),
             ],
           ),
