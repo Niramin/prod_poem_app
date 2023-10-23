@@ -54,8 +54,10 @@ class _ControllerState extends State<Controller>{
     }
 
     ColorContext curContext = ColorContext();
+    ChangeNotifier stateProvider;
     bool isNight = false;
     var hour = DateTime.now().hour;
+    hour =19;
     if(hour> 18)
     {
       isNight = true;
@@ -63,14 +65,16 @@ class _ControllerState extends State<Controller>{
     if(isNight)
     {
         curContext.setNight();
+        stateProvider = NightSkyAppState() ;
     }
     else{
       curContext.setDay();
+      stateProvider = SkyAppState() ;
     }
 
-    curContext.setNight();
+   // curContext.setNight();
   return ChangeNotifierProvider(
-    create: (context) => SkyAppState(),
+    create: (context) => NightSkyAppState(),
     child: Scaffold(
       backgroundColor: curContext.bgColour,
       appBar: AppBar(
